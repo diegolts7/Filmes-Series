@@ -8,6 +8,19 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <div class="modal">
+        <div class="modalAdd">
+            <div class="pesquisa">
+                <input type="text" placeholder="Digite o nome...">
+            </div>
+            <div class="resultados">
+                
+            </div>
+            <div class="enviaPesquisa">
+                <input type="button" value="Selecionar" id="addTitulo" class="botao">
+            </div>
+        </div>
+    </div>
     <div class="conteinerPrincipal">
         <header>
             <p>Sua lista de filmes e series</p>
@@ -15,7 +28,7 @@
         <div class="conteiner">
             <div class="titulo">
                 <p>Filmes para assistir</p>
-                <i class='bx bxs-add-to-queue'></i>
+                <i class='bx bxs-add-to-queue' id="addFilme"></i>
             </div>
             <div class="lista" id="listaFilmes">
                 
@@ -24,7 +37,7 @@
         <div class="conteiner">
             <div class="titulo">
                 <p>Series para assistir</p>
-                <i class='bx bxs-add-to-queue'></i>
+                <i class='bx bxs-add-to-queue' id="addSerie"></i>
             </div>
             <div class="lista" id="listaSeries">
                 
