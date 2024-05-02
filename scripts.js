@@ -12,16 +12,26 @@ const pesquisaSerie = document.querySelector("#pesquisaSerie");
 const btnAddTitulo = document.querySelector("#addTitulo");
 const addFilme = document.querySelector("#addFilme");
 const addSerie = document.querySelector("#addSerie");
+const conteinerFilmes = document.querySelector("#listaFilmes");
+const conteinerSeries = document.querySelector("#listaSeries");
+const abrirFilmes = document.querySelector("#abrirFilmes");
+const abrirSeries = document.querySelector("#abrirSeries");
 /*const modal = document.querySelector(".modal");
 const modal = document.querySelector(".modal");
 const modal = document.querySelector(".modal");*/
 
 
+// variaveis de implementação
+
+let tituloSelecionado;
+let conteinerFilmesFechado = true;
+let conteinerSeriesFechado = true;
+
 //orientação a objeto
 
 class ListaFS {
     constructor(listaFilme,listaSerie,listaAssistido){
-        this.lista = listaFilme;
+        this.listaFilme = listaFilme;
         this.listaSerie = listaSerie;
         this.listaAssistido = listaAssistido;
     }
@@ -54,6 +64,17 @@ class ListaFS {
                 card.appendChild(imgCard);
                 card.appendChild(titulo);
                 conteiner.appendChild(card);
+
+                if(conteiner === resultadosPesquisa){
+
+                    card.addEventListener("click", ()=>{
+                        btnAddTitulo.style.display = "flex";
+                        btnAddTitulo.value = `Adicionar ${card.lastChild.textContent}`;
+                        tituloSelecionado = element;
+    
+                    });
+
+                }
                 
             }
             
@@ -76,6 +97,9 @@ pesquisaFilme.addEventListener("keydown", (e) => {
 pesquisaSerie.addEventListener("keydown", (e) => {
     mostrarResultadosPesquisa(e,pesquisaSerie, "tv");
 });
+btnAddTitulo.addEventListener("click", addTitulo);
+abrirFilmes.addEventListener("click", abrirConteinerFilmes);
+abrirSeries.addEventListener("click", abrirConteinerSeries);
 
 
 
@@ -93,6 +117,28 @@ const getAPI = async (tipo, nome)=> {
         console.log(error);
     }
 };
+
+function abrirConteinerFilmes() {
+
+    if(conteinerFilmesFechado){
+        conteinerFilmes.style.display = "flex";
+        conteinerFilmesFechado = false;
+    }else{
+        conteinerFilmes.style.display = "none";
+        conteinerFilmesFechado = true;
+    }
+}
+
+function abrirConteinerSeries() {
+
+    if(conteinerSeriesFechado){
+        conteinerSeries.style.display = "flex";
+        conteinerSeriesFechado = false;
+    }else{
+        conteinerSeries.style.display = "none";
+        conteinerSeriesFechado = true;
+    }
+}
 
 function abrirModalAddTitulo() {
 
@@ -133,13 +179,42 @@ function fecharModalClicarFora(event) {
 
 async function mostrarResultadosPesquisa(e,input,tipo) {
     if(e.key === "Enter" && input.value.trim() !== ""){
-        btnAddTitulo.style.display = "flex";
+        btnAddTitulo.style.display = "none";
         try{
             const dados = await getAPI(tipo, input.value);
             listaPrincipal.mostrarTitulos(resultadosPesquisa,dados);
+
+
         }catch (error){
             alert(error);
         }
     }
     
+}
+
+function addTitulo() {
+    if(tituloSelecionado.title){
+
+        if(listaPrincipal.listaFilme.has(tituloSelecionado.id)){
+            alert("Esse filme já está na sua lista.");
+        }else{
+            listaPrincipal.listaFilme.set(tituloSelecionado.id, tituloSelecionado);
+            fecharModal();
+            conteinerFilmes.style.display = "flex";
+            conteinerFilmesFechado = false;
+            listaPrincipal.mostrarTitulos(conteinerFilmes, listaPrincipal.listaFilme);
+        }
+
+    }else{
+        if(listaPrincipal.listaSerie.has(tituloSelecionado.id)){
+            alert("Essa serie já está na sua lista.");
+        }else{
+            listaPrincipal.listaSerie.set(tituloSelecionado.id, tituloSelecionado);
+            fecharModal();
+            conteinerSeries.style.display = "flex";
+            conteinerSeriesFechado = false;
+            listaPrincipal.mostrarTitulos(conteinerSeries, listaPrincipal.listaSerie);
+        }
+        
+    }
 }
