@@ -55,6 +55,7 @@ body {
     width: 60vh;
     border-radius: 10px;
     border: 2px solid #708090;
+    display: none;
 }
 
 .botao {
@@ -71,6 +72,10 @@ body {
     border: 1px solid #1E90FF;
     color: #1E90FF;
     transition: .3s;
+}
+
+#addTitulo {
+    display: none;
 }
 
 .resultados {
@@ -116,6 +121,19 @@ body {
 }
 .infos i {
     color: #1E90FF;
+}
+
+.cards {
+    padding: 10px;
+    width: 120px;
+    overflow-y: auto;
+}
+.cards img {
+    width: 80px;
+    height: 110px;
+}
+.cards p {
+    font-weight: 500;
 }
 
 
@@ -177,11 +195,14 @@ header p {
     transition: .3s;
 }
 .lista {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: left;
     border-radius: 5px;
     margin: 10px;
+    min-height: 15vh;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 #assistidos {
