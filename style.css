@@ -39,14 +39,13 @@ body {
 
 .modalAdd {
     width: 80vh;
-    background: white;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.6);
-    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
     display: none;
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    padding: 50px;
+    padding: 30px;
     gap: 1.5rem;
 }
 
@@ -54,8 +53,11 @@ body {
     padding: 10px;
     width: 60vh;
     border-radius: 10px;
-    border: 2px solid #708090;
+    border: none;
     display: none;
+    background-color: aliceblue;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    outline: none;
 }
 
 .botao {
@@ -68,9 +70,9 @@ body {
     cursor: pointer;
 }
 .botao:hover {
-    background-color: aliceblue;
-    border: 1px solid #1E90FF;
-    color: #1E90FF;
+    background-color: inherit;
+    border: 1px solid black;
+    color: black;
     transition: .3s;
 }
 
@@ -80,7 +82,7 @@ body {
 
 .resultados {
     width: 100%;
-    height: 50vh;
+    max-height: 50vh;
     gap: 1rem;
     display: flex;
     justify-content: center;
@@ -92,8 +94,7 @@ body {
     width: 50vh;
     height: 60vh;
     padding: 15px;
-    background-color: aliceblue;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.3);
     border-radius: 10px;
     display: none;
     align-items: center;
@@ -101,7 +102,6 @@ body {
     flex-direction: column;
     overflow-y: auto;
 }
-
 .modalInfo img {
     width: 80%;
     border-radius: 10px;
@@ -126,7 +126,6 @@ body {
 .cards {
     padding: 10px;
     width: 120px;
-    overflow-y: auto;
 }
 
 .cards img {
@@ -196,14 +195,23 @@ header p {
     transition: .3s;
 }
 .lista {
+    padding: 10px;
     display: none;
-    align-items: center;
+    align-items: first baseline;
     justify-content: left;
     border-radius: 5px;
     margin: 10px;
-    min-height: 15vh;
     width: 100%;
     flex-wrap: wrap;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+.lista div:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    color: #1E90FF;
+    transition: .3s;
 }
 
 #assistidos {

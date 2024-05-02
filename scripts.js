@@ -16,9 +16,12 @@ const conteinerFilmes = document.querySelector("#listaFilmes");
 const conteinerSeries = document.querySelector("#listaSeries");
 const abrirFilmes = document.querySelector("#abrirFilmes");
 const abrirSeries = document.querySelector("#abrirSeries");
-/*const modal = document.querySelector(".modal");
-const modal = document.querySelector(".modal");
-const modal = document.querySelector(".modal");*/
+const tituloInfo = document.querySelector("#tituloInfo");
+const imgInfo = document.querySelector("#imgInfo");
+const votoInfo = document.querySelector("#votoInfo");
+const dataInfo = document.querySelector("#dataInfo");
+const descricaoInfo = document.querySelector("#descricaoInfo");
+const btnMarcarConcluido = document.querySelector("#btnMarcarConcluido");
 
 
 // variaveis de implementação
@@ -74,12 +77,38 @@ class ListaFS {
     
                     });
 
+                }else{
+                    card.addEventListener("click", ()=> {
+                        abrirModalInfo();
+                        this.mostrarInfo(element);
+                    })
                 }
+                
                 
             }
             
         });
 
+    }
+    mostrarInfo(objeto) {
+
+        if(objeto.title){
+            tituloInfo.textContent = objeto.title;
+        }else{
+            tituloInfo.textContent = objeto.name;
+        }
+
+        imgInfo.src = `${urlBaseImg}${objeto.backdrop_path}`;
+
+        votoInfo.textContent = `${objeto.vote_average}`;
+
+        if(objeto.release_date){
+            dataInfo.textContent = objeto.release_date;
+        }else{
+            dataInfo.textContent = objeto.first_air_date;
+        }
+
+        descricaoInfo.textContent = objeto.overview;
     }
 }
 
@@ -157,6 +186,12 @@ function abrirModalAddSerie() {
     abrirModalAddTitulo();
     pesquisaSerie.style.display = "flex";
     pesquisaFilme.style.display = "none";
+}
+
+function abrirModalInfo() {
+    modal.style.display = "flex";
+    modalAdd.style.display = "none";
+    modalInfo.style.display = "flex";
 }
 
 function fecharModal() {
