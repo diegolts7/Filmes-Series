@@ -90,6 +90,7 @@ class ListaFS {
                 }else if(conteiner === conteinerAssistidos){
                     card.addEventListener("click", ()=> {
                         abrirModalInfo();
+                        this.mostrarInfo(element);
                         btnMarcarConcluido.style.display = "none";
                     });
 
