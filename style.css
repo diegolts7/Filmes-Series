@@ -218,12 +218,36 @@ header p {
     color: #1E90FF;
 }
 
+footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    gap: 1.5rem;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+footer i {
+    font-size: 25px;
+}
+footer a {
+    color: black;
+}
+
+
 @media screen and (max-width: 701px){
     .modalAdd {
         width: 60vh;
     }
     .pesquisa input {
         width: 45vh;
+    }
+    footer i {
+        font-size: 20px;
+    }
+    footer p {
+        font-size: 14px;
     }
 }
 
@@ -259,6 +283,9 @@ header p {
     .titulo i {
         font-size: 20px;
     }
+    header {
+        height: 8vh;
+    }
     header p {
         font-size: 20px;
     }
@@ -268,5 +295,14 @@ header p {
     }
     .lista {
         justify-content: center; 
+    }
+    footer {
+        gap: .5rem;
+    }
+    footer i {
+        font-size: 20px;
+    }
+    footer p {
+        font-size: 12px;
     }
 }
