@@ -70,7 +70,7 @@ body {
     cursor: pointer;
 }
 .botao:hover {
-    background-color: inherit;
+    background-color: transparent;
     border: 1px solid black;
     color: black;
     transition: .3s;

@@ -150,10 +150,17 @@ class ListaFS {
     }
 }
 
-let listaPrincipal = new ListaFS(new Map(),new Map(),new Map());
+let arrayFilmes = localStorage.getItem("listaFilmes") ? JSON.parse(localStorage.getItem("listaFilmes")) : [] ;
+
+let arraySeries = localStorage.getItem("listaSeries") ? JSON.parse(localStorage.getItem("listaSeries")) : [] ;
+
+let arrayAssistidos = localStorage.getItem("listaAssistidos") ? JSON.parse(localStorage.getItem("listaAssistidos")) : [] ;
+
+let listaPrincipal = new ListaFS(new Map(arrayFilmes),new Map(arraySeries),new Map(arrayAssistidos));
 
 
 // eventos 
+
 
 addFilme.addEventListener("click", abrirModalAddFilme);
 addSerie.addEventListener("click", abrirModalAddSerie);
@@ -169,13 +176,12 @@ abrirFilmes.addEventListener("click", abrirConteinerFilmes);
 abrirSeries.addEventListener("click", abrirConteinerSeries);
 abrirAssistidos.addEventListener("click", abrirConteinerAssistidos);
 btnMarcarConcluido.addEventListener("click", ()=> {
-
     conteinerAssistidos.style.display = "flex";
     conteinerAssistidosFechado = false;
     listaPrincipal.marcarConcluido(cardClicado);
 });
-
-
+window.addEventListener("beforeunload", salvarDados);
+window.addEventListener("DOMContentLoaded", lerDados);
 
 
 // funções
@@ -245,6 +251,7 @@ function abrirModalAddSerie() {
 }
 
 function abrirModalInfo() {
+    btnMarcarConcluido.style.display = "flex";
     modal.style.display = "flex";
     modalAdd.style.display = "none";
     modalInfo.style.display = "flex";
@@ -320,4 +327,24 @@ function atualizarContagem(conteiner) {
     }else if(conteiner === conteinerAssistidos){
         contagemAssistidos.textContent = `${listaPrincipal.listaAssistido.size} `;
     }
+}
+
+function salvarDados() {
+
+    let entriesFilmes = Array.from(listaPrincipal.listaFilme.entries());
+    let entriesSeries = Array.from(listaPrincipal.listaSerie.entries());
+    let entriesAssistidos = Array.from(listaPrincipal.listaAssistido.entries());
+
+    localStorage.setItem("listaFilmes", JSON.stringify(entriesFilmes));
+    localStorage.setItem("listaSeries", JSON.stringify(entriesSeries));
+    localStorage.setItem("listaAssistidos", JSON.stringify(entriesAssistidos));
+
+}
+
+function lerDados() {
+    
+    listaPrincipal.mostrarTitulos(conteinerFilmes, listaPrincipal.listaFilme);
+    listaPrincipal.mostrarTitulos(conteinerSeries, listaPrincipal.listaSerie);
+    listaPrincipal.mostrarTitulos(conteinerAssistidos, listaPrincipal.listaAssistido);
+    
 }
