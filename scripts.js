@@ -14,14 +14,20 @@ const addFilme = document.querySelector("#addFilme");
 const addSerie = document.querySelector("#addSerie");
 const conteinerFilmes = document.querySelector("#listaFilmes");
 const conteinerSeries = document.querySelector("#listaSeries");
+const conteinerAssistidos = document.querySelector("#listaAssistidos");
 const abrirFilmes = document.querySelector("#abrirFilmes");
-const abrirSeries = document.querySelector("#abrirSeries");
+const abrirSeries = document.querySelector("#abrirSeries"); 
+const abrirAssistidos = document.querySelector("#abrirAssistidos");
 const tituloInfo = document.querySelector("#tituloInfo");
 const imgInfo = document.querySelector("#imgInfo");
 const votoInfo = document.querySelector("#votoInfo");
 const dataInfo = document.querySelector("#dataInfo");
 const descricaoInfo = document.querySelector("#descricaoInfo");
 const btnMarcarConcluido = document.querySelector("#btnMarcarConcluido");
+const contagemFilmes = document.querySelector("#contagemFilmes");
+const contagemSeries = document.querySelector("#contagemSeries");
+const contagemAssistidos = document.querySelector("#contagemAssistidos");
+
 
 
 // variaveis de implementação
@@ -29,6 +35,8 @@ const btnMarcarConcluido = document.querySelector("#btnMarcarConcluido");
 let tituloSelecionado;
 let conteinerFilmesFechado = true;
 let conteinerSeriesFechado = true;
+let conteinerAssistidosFechado = true;
+let cardClicado;
 
 //orientação a objeto
 
@@ -42,6 +50,8 @@ class ListaFS {
 
         lista.set(objeto.id, objeto);
         this.mostrarTitulos(conteiner,lista);
+        
+        
     }
     mostrarTitulos(conteiner,lista){
 
@@ -77,8 +87,15 @@ class ListaFS {
     
                     });
 
+                }else if(conteiner === conteinerAssistidos){
+                    card.addEventListener("click", ()=> {
+                        abrirModalInfo();
+                        btnMarcarConcluido.style.display = "none";
+                    });
+
                 }else{
                     card.addEventListener("click", ()=> {
+                        cardClicado = element;
                         abrirModalInfo();
                         this.mostrarInfo(element);
                     })
@@ -88,6 +105,7 @@ class ListaFS {
             }
             
         });
+        atualizarContagem(conteiner);
 
     }
     mostrarInfo(objeto) {
@@ -110,6 +128,25 @@ class ListaFS {
 
         descricaoInfo.textContent = objeto.overview;
     }
+    marcarConcluido(element){
+        
+        if(element.title){
+
+            this.listaFilme.delete(element.id);
+            this.addTitulo(conteinerAssistidos, this.listaAssistido, element);
+            this.mostrarTitulos(conteinerFilmes, this.listaFilme);
+            fecharModal();
+            atualizarContagem(conteinerFilmes);
+    
+        }else{
+            
+            this.listaSerie.delete(element.id);
+            this.addTitulo(conteinerAssistidos, this.listaAssistido, element);
+            this.mostrarTitulos(conteinerSeries, this.listaSerie);
+            fecharModal();
+            atualizarContagem(conteinerSeries);
+        }
+    }
 }
 
 let listaPrincipal = new ListaFS(new Map(),new Map(),new Map());
@@ -129,6 +166,13 @@ pesquisaSerie.addEventListener("keydown", (e) => {
 btnAddTitulo.addEventListener("click", addTitulo);
 abrirFilmes.addEventListener("click", abrirConteinerFilmes);
 abrirSeries.addEventListener("click", abrirConteinerSeries);
+abrirAssistidos.addEventListener("click", abrirConteinerAssistidos);
+btnMarcarConcluido.addEventListener("click", ()=> {
+    
+    conteinerAssistidos.style.display = "flex";
+    conteinerAssistidosFechado = false;
+    listaPrincipal.marcarConcluido(cardClicado);
+});
 
 
 
@@ -166,6 +210,17 @@ function abrirConteinerSeries() {
     }else{
         conteinerSeries.style.display = "none";
         conteinerSeriesFechado = true;
+    }
+}
+
+function abrirConteinerAssistidos() {
+
+    if(conteinerAssistidosFechado){
+        conteinerAssistidos.style.display = "flex";
+        conteinerAssistidosFechado = false;
+    }else{
+        conteinerAssistidos.style.display = "none";
+        conteinerAssistidosFechado = true;
     }
 }
 
@@ -230,8 +285,8 @@ async function mostrarResultadosPesquisa(e,input,tipo) {
 function addTitulo() {
     if(tituloSelecionado.title){
 
-        if(listaPrincipal.listaFilme.has(tituloSelecionado.id)){
-            alert("Esse filme já está na sua lista.");
+        if(listaPrincipal.listaFilme.has(tituloSelecionado.id) || listaPrincipal.listaAssistido.has(tituloSelecionado.id)){
+            alert("Esse filme já foi adicionado ou assistido.");
         }else{
             
             listaPrincipal.addTitulo(conteinerFilmes, listaPrincipal.listaFilme, tituloSelecionado);
@@ -242,8 +297,8 @@ function addTitulo() {
         }
 
     }else{
-        if(listaPrincipal.listaSerie.has(tituloSelecionado.id)){
-            alert("Essa serie já está na sua lista.");
+        if(listaPrincipal.listaSerie.has(tituloSelecionado.id) || listaPrincipal.listaAssistido.has(tituloSelecionado.id)){
+            alert("Essa serie já foi adicionada ou assistida.");
         }else{
             
             listaPrincipal.addTitulo(conteinerSeries, listaPrincipal.listaSerie, tituloSelecionado);
@@ -253,5 +308,15 @@ function addTitulo() {
             
         }
         
+    }
+}
+
+function atualizarContagem(conteiner) {
+    if(conteiner === conteinerFilmes){
+        contagemFilmes.textContent = `${listaPrincipal.listaFilme.size} `;
+    }else if(conteiner === conteinerSeries){
+        contagemSeries.textContent = `${listaPrincipal.listaSerie.size} `;
+    }else if(conteiner === conteinerAssistidos){
+        contagemAssistidos.textContent = `${listaPrincipal.listaAssistido.size} `;
     }
 }
