@@ -58,7 +58,7 @@ class ListaFS {
         conteiner.innerHTML = "";
         
         lista.forEach(element => {
-            if(element.poster_path){
+            if(element.poster_path && element.adult === false){
 
                 const card = document.createElement("div");
                 card.classList.add("cards");
@@ -168,7 +168,7 @@ abrirFilmes.addEventListener("click", abrirConteinerFilmes);
 abrirSeries.addEventListener("click", abrirConteinerSeries);
 abrirAssistidos.addEventListener("click", abrirConteinerAssistidos);
 btnMarcarConcluido.addEventListener("click", ()=> {
-    
+
     conteinerAssistidos.style.display = "flex";
     conteinerAssistidosFechado = false;
     listaPrincipal.marcarConcluido(cardClicado);

@@ -217,3 +217,56 @@ header p {
 .contagem {
     color: #1E90FF;
 }
+
+@media screen and (max-width: 701px){
+    .modalAdd {
+        width: 60vh;
+    }
+    .pesquisa input {
+        width: 45vh;
+    }
+}
+
+@media screen and (max-width: 431px){
+    .modalAdd {
+        width: 40vh;
+    }
+    .pesquisa input {
+        width: 35vh;
+    }
+    .modalAdd {
+        background: rgba(255,255,255,0.5);
+    }
+    .modalInfo {
+        width: 40vh;
+        background-color: rgba(255,255,255,0.5);
+    }
+    .cards {
+        padding: 10px;
+        width: 90px;
+    }
+    
+    .cards img {
+        width: 55px;
+        height: 80px;
+    }
+    .cards p {
+        font-size: 13px;
+    }
+    .titulo p {
+        font-size: 18px;
+    }
+    .titulo i {
+        font-size: 20px;
+    }
+    header p {
+        font-size: 20px;
+    }
+    #addTitulo {
+        font-size: 12px;
+        max-width: 35vh;
+    }
+    .lista {
+        justify-content: center; 
+    }
+}
