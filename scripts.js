@@ -233,22 +233,24 @@ function addTitulo() {
         if(listaPrincipal.listaFilme.has(tituloSelecionado.id)){
             alert("Esse filme já está na sua lista.");
         }else{
-            listaPrincipal.listaFilme.set(tituloSelecionado.id, tituloSelecionado);
+            
+            listaPrincipal.addTitulo(conteinerFilmes, listaPrincipal.listaFilme, tituloSelecionado);
             fecharModal();
             conteinerFilmes.style.display = "flex";
             conteinerFilmesFechado = false;
-            listaPrincipal.mostrarTitulos(conteinerFilmes, listaPrincipal.listaFilme);
+
         }
 
     }else{
         if(listaPrincipal.listaSerie.has(tituloSelecionado.id)){
             alert("Essa serie já está na sua lista.");
         }else{
-            listaPrincipal.listaSerie.set(tituloSelecionado.id, tituloSelecionado);
+            
+            listaPrincipal.addTitulo(conteinerSeries, listaPrincipal.listaSerie, tituloSelecionado);
             fecharModal();
             conteinerSeries.style.display = "flex";
             conteinerSeriesFechado = false;
-            listaPrincipal.mostrarTitulos(conteinerSeries, listaPrincipal.listaSerie);
+            
         }
         
     }

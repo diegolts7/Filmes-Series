@@ -13,12 +13,12 @@
   
   /* Estilizando a pista (fundo) da barra de rolagem */
   ::-webkit-scrollbar-track {
-    background: aliceblue; /* Cor de fundo da pista */
+    background: #708090; /* Cor de fundo da pista */
   }
   
   /* Estilizando o polegar (alça) da barra de rolagem */
   ::-webkit-scrollbar-thumb {
-    background: #708090; /* Cor do polegar */
+    background: #1E90FF; /* Cor do polegar */
   }
 
 body {
@@ -33,7 +33,7 @@ body {
     display: none;
     align-items: center;
     justify-content: center;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(5px);
 }
 
