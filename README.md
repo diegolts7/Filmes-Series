@@ -21,8 +21,8 @@ fetch("https://api.themoviedb.org/3/search/")
 
 ## Imagens do projeto
 
-![Imagem 1](/README/img/Captura%20de%20tela%202024-05-07%20150705.png)
+![Imagem 1](img/Captura%20de%20tela%202024-05-07%20150705.png)
 
-![Imagem 2](/README/img/Captura%20de%20tela%202024-05-07%20150827.png)
+![Imagem 2](img/Captura%20de%20tela%202024-05-07%20150827.png)
 
-![Imagem 3](/README/img/Captura%20de%20tela%202024-05-07%20150757.png)
+![Imagem 3](img/Captura%20de%20tela%202024-05-07%20150757.png)
