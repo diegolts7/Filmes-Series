@@ -11,13 +11,13 @@ Esse projeto se baseia na criação de uma página web responsiva com a principa
 
 ### Requisição para API
 
-<div style="background-color: black; border-radius: 10px;">
+
 
 ```javascript
 fetch("https://api.themoviedb.org/3/search/")
 ```
 
-</div>
+
 
 ## Imagens do projeto
 
